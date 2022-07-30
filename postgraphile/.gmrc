@@ -1,0 +1,13 @@
+{
+  "rootConnectionString": "postgres://vscode:notsecure@localhost:5433/postgres",
+  "connectionString": "postgres://vscode:notsecure@localhost:5433/mydb",
+  "shadowConnectionString": "postgres://vscode:notsecure@localhost:5433/mydb_shadow",
+  "afterCurrent":  [],
+  "afterAllMigrations": [
+    {
+      "_": "command",
+      "shadow": true,
+      "command": "pg_dump --schema-only --no-owner --exclude-schema=graphile_migrate --file=data/schema.sql \"$GM_DBURL\""
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+    "launch": {
+        "configurations": [
+            {
+                "name": "Attach To Postgraphile",
+                "type": "node",
+                "request": "attach",
+                "port": 9231,
+                "address": "localhost",
+                "remoteRoot": "/usr/src/app",
+                "localRoot": "${workspaceRoot:🐘 Postgraphile}"
+            }
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "type": "shell",
+                "label": "bootstrap",
+                "command": "touch ${workspaceRoot}/schema.graphql",
+                "problemMatcher": []
+            }
+        ]
+    },
+    "folders": [
+	    {
+	        "path": ".",
+            "name": "🗿 Root",
+	    },
+        {
+            "path": "mobile",
+            "name": "🐦 Mobile"
+        },
+        {
+            "path": "postgraphile",
+            "name": "🐘 Postgraphile"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/node_modules": true,
+        }
+    },
+}

@@ -1,10 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:gql_client/src/refresher_link.dart';
 import 'package:gql_client/src/token_manager.dart';
 import 'package:local_user/local_user.dart';
 import 'package:http/http.dart' as http;
 import 'package:graphql/client.dart';
 
-GraphQLClient buildGqlClient({
+class GQLClient extends GraphQLClient implements ShadowChangeHandlers {
+  late ValueNotifier<GraphQLClient> shadowListenableClient =
+      ValueNotifier(this);
+
+  GQLClient({required Link link, required GraphQLCache cache})
+      : super(link: link, cache: cache);
+
+  @override
+  void onGetShadowed(covariant GQLClient newClient) {
+    shadowListenableClient.value = newClient;
+  }
+
+  @override
+  void onLeaveShadow(covariant GQLClient oldClient) {
+    shadowListenableClient.value = this;
+  }
+}
+
+GQLClient buildGqlClient({
   required bool authenticated,
   required LocalUser localUser,
   required Uri endpoint,
@@ -24,5 +44,5 @@ GraphQLClient buildGqlClient({
     HttpLink(endpoint.toString(), httpClient: http.Client()),
   ]);
 
-  return GraphQLClient(link: link, cache: GraphQLCache(store: InMemoryStore()));
+  return GQLClient(link: link, cache: GraphQLCache(store: InMemoryStore()));
 }

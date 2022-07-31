@@ -5,6 +5,7 @@ targets:
         options:
           clients:
             - graphql
+            - graphql_flutter
           scalars:
             uuid:
               type: UuidType

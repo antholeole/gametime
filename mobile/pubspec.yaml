@@ -16,6 +16,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   toaster_next: ^1.1.0
   graphql: ^5.0.0
+  graphql_flutter: ^5.1.1-beta.4
 
   uuid_type:
     path: ./stdlib/uuid_type

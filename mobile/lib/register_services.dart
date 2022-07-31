@@ -11,7 +11,7 @@ void registerBasicServices(GetIt getIt, Config config) {
   getIt.registerSingleton<Config>(config);
   getIt.registerSingleton(LocalUser());
 
-  getIt.registerSingleton<GraphQLClient>(buildGqlClient(
+  getIt.registerSingleton<GQLClient>(buildGqlClient(
     localUser: getIt<LocalUser>(),
     authenticated: false,
     endpoint: config.gqlEndpoint,
@@ -19,7 +19,7 @@ void registerBasicServices(GetIt getIt, Config config) {
 }
 
 void registerAuthedServices(Config config, GetIt getIt) {
-  getIt.registerSingleton<GraphQLClient>(buildGqlClient(
+  getIt.registerSingleton<GQLClient>(buildGqlClient(
     localUser: getIt<LocalUser>(),
     authenticated: true,
     endpoint: config.gqlEndpoint,

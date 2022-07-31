@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
+import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 import 'package:json_annotation/json_annotation.dart';
 part 'login.graphql.g.dart';
 
@@ -309,6 +311,96 @@ extension ClientExtension$Mutation$Authenticate on graphql.GraphQLClient {
   graphql.ObservableQuery<Mutation$Authenticate> watchMutation$Authenticate(
           WatchOptions$Mutation$Authenticate options) =>
       this.watchMutation(options);
+}
+
+class Mutation$Authenticate$HookResult {
+  Mutation$Authenticate$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$Authenticate runMutation;
+
+  final graphql.QueryResult<Mutation$Authenticate> result;
+}
+
+Mutation$Authenticate$HookResult useMutation$Authenticate(
+    [WidgetOptions$Mutation$Authenticate? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$Authenticate());
+  return Mutation$Authenticate$HookResult(
+    (variables, {optimisticResult}) => result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult,
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$Authenticate> useWatchMutation$Authenticate(
+        WatchOptions$Mutation$Authenticate options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$Authenticate
+    extends graphql.MutationOptions<Mutation$Authenticate> {
+  WidgetOptions$Mutation$Authenticate(
+      {String? operationName,
+      graphql.FetchPolicy? fetchPolicy,
+      graphql.ErrorPolicy? errorPolicy,
+      graphql.CacheRereadPolicy? cacheRereadPolicy,
+      Object? optimisticResult,
+      graphql.Context? context,
+      OnMutationCompleted$Mutation$Authenticate? onCompleted,
+      graphql.OnMutationUpdate<Mutation$Authenticate>? update,
+      graphql.OnError? onError})
+      : onCompletedWithParsed = onCompleted,
+        super(
+            operationName: operationName,
+            fetchPolicy: fetchPolicy,
+            errorPolicy: errorPolicy,
+            cacheRereadPolicy: cacheRereadPolicy,
+            optimisticResult: optimisticResult,
+            context: context,
+            onCompleted: onCompleted == null
+                ? null
+                : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$Authenticate(data)),
+            update: update,
+            onError: onError,
+            document: documentNodeMutationAuthenticate,
+            parserFn: _parserFn$Mutation$Authenticate);
+
+  final OnMutationCompleted$Mutation$Authenticate? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed
+      ];
+}
+
+typedef RunMutation$Mutation$Authenticate
+    = graphql.MultiSourceResult<Mutation$Authenticate>
+        Function(Variables$Mutation$Authenticate, {Object? optimisticResult});
+typedef Builder$Mutation$Authenticate = widgets.Widget Function(
+    RunMutation$Mutation$Authenticate,
+    graphql.QueryResult<Mutation$Authenticate>?);
+
+class Mutation$Authenticate$Widget
+    extends graphql_flutter.Mutation<Mutation$Authenticate> {
+  Mutation$Authenticate$Widget(
+      {widgets.Key? key,
+      WidgetOptions$Mutation$Authenticate? options,
+      required Builder$Mutation$Authenticate builder})
+      : super(
+            key: key,
+            options: options ?? WidgetOptions$Mutation$Authenticate(),
+            builder: (run, result) => builder(
+                (variables, {optimisticResult}) =>
+                    run(variables.toJson(), optimisticResult: optimisticResult),
+                result));
 }
 
 @JsonSerializable(explicitToJson: true)

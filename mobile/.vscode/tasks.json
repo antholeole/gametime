@@ -19,7 +19,8 @@
                 "pub",
                 "run",
                 "build_runner",
-                "watch"
+                "watch",
+                "--delete-conflicting-outputs"
             ],
             "problemMatcher": [
                 "$dart-build_runner"

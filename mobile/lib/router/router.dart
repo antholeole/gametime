@@ -4,8 +4,6 @@ import 'package:gametime/pages/home/home_page.dart';
 import 'package:gametime/pages/login/view/login_page.dart';
 import 'package:gametime/pages/splash/splash_page.dart';
 
-part 'router.gr.dart';
-
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
@@ -25,7 +23,7 @@ part 'router.gr.dart';
   ],
 )
 // extend the generated private router
-class AppRouter extends _$AppRouter {}
+class $AppRouter {}
 
 // public due to bug where private transitions don't work
 Widget noAnimationTransition(

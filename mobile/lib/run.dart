@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gametime/configs/base_config.dart';
 import 'package:gametime/register_services.dart';
-import 'package:gametime/router/router.dart';
+import 'package:gametime/router/router.gr.dart';
 import 'package:gametime/router/user_state_observer.dart';
 import 'package:toaster_next/toaster/toaster_interface.dart';
 

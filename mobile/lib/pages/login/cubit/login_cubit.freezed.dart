@@ -12,7 +12,27 @@ part of 'login_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+class _$LoginStateTearOff {
+  const _$LoginStateTearOff();
+
+  _LoginPromptState prompting() {
+    return _LoginPromptState();
+  }
+
+  _LoginLoadingState loading() {
+    return _LoginLoadingState();
+  }
+
+  _LoginLoggedInState loggedIn() {
+    return _LoginLoggedInState();
+  }
+}
+
+/// @nodoc
+const $LoginState = _$LoginStateTearOff();
 
 /// @nodoc
 mixin _$LoginState {
@@ -79,22 +99,22 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_LoginPromptStateCopyWith<$Res> {
-  factory _$$_LoginPromptStateCopyWith(
-          _$_LoginPromptState value, $Res Function(_$_LoginPromptState) then) =
-      __$$_LoginPromptStateCopyWithImpl<$Res>;
+abstract class _$LoginPromptStateCopyWith<$Res> {
+  factory _$LoginPromptStateCopyWith(
+          _LoginPromptState value, $Res Function(_LoginPromptState) then) =
+      __$LoginPromptStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoginPromptStateCopyWithImpl<$Res>
+class __$LoginPromptStateCopyWithImpl<$Res>
     extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$_LoginPromptStateCopyWith<$Res> {
-  __$$_LoginPromptStateCopyWithImpl(
-      _$_LoginPromptState _value, $Res Function(_$_LoginPromptState) _then)
-      : super(_value, (v) => _then(v as _$_LoginPromptState));
+    implements _$LoginPromptStateCopyWith<$Res> {
+  __$LoginPromptStateCopyWithImpl(
+      _LoginPromptState _value, $Res Function(_LoginPromptState) _then)
+      : super(_value, (v) => _then(v as _LoginPromptState));
 
   @override
-  _$_LoginPromptState get _value => super._value as _$_LoginPromptState;
+  _LoginPromptState get _value => super._value as _LoginPromptState;
 }
 
 /// @nodoc
@@ -110,7 +130,7 @@ class _$_LoginPromptState implements _LoginPromptState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoginPromptState);
+        (other.runtimeType == runtimeType && other is _LoginPromptState);
   }
 
   @override
@@ -190,22 +210,22 @@ abstract class _LoginPromptState implements LoginState {
 }
 
 /// @nodoc
-abstract class _$$_LoginLoadingStateCopyWith<$Res> {
-  factory _$$_LoginLoadingStateCopyWith(_$_LoginLoadingState value,
-          $Res Function(_$_LoginLoadingState) then) =
-      __$$_LoginLoadingStateCopyWithImpl<$Res>;
+abstract class _$LoginLoadingStateCopyWith<$Res> {
+  factory _$LoginLoadingStateCopyWith(
+          _LoginLoadingState value, $Res Function(_LoginLoadingState) then) =
+      __$LoginLoadingStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoginLoadingStateCopyWithImpl<$Res>
+class __$LoginLoadingStateCopyWithImpl<$Res>
     extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$_LoginLoadingStateCopyWith<$Res> {
-  __$$_LoginLoadingStateCopyWithImpl(
-      _$_LoginLoadingState _value, $Res Function(_$_LoginLoadingState) _then)
-      : super(_value, (v) => _then(v as _$_LoginLoadingState));
+    implements _$LoginLoadingStateCopyWith<$Res> {
+  __$LoginLoadingStateCopyWithImpl(
+      _LoginLoadingState _value, $Res Function(_LoginLoadingState) _then)
+      : super(_value, (v) => _then(v as _LoginLoadingState));
 
   @override
-  _$_LoginLoadingState get _value => super._value as _$_LoginLoadingState;
+  _LoginLoadingState get _value => super._value as _LoginLoadingState;
 }
 
 /// @nodoc
@@ -221,7 +241,7 @@ class _$_LoginLoadingState implements _LoginLoadingState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoginLoadingState);
+        (other.runtimeType == runtimeType && other is _LoginLoadingState);
   }
 
   @override
@@ -301,22 +321,22 @@ abstract class _LoginLoadingState implements LoginState {
 }
 
 /// @nodoc
-abstract class _$$_LoginLoggedInStateCopyWith<$Res> {
-  factory _$$_LoginLoggedInStateCopyWith(_$_LoginLoggedInState value,
-          $Res Function(_$_LoginLoggedInState) then) =
-      __$$_LoginLoggedInStateCopyWithImpl<$Res>;
+abstract class _$LoginLoggedInStateCopyWith<$Res> {
+  factory _$LoginLoggedInStateCopyWith(
+          _LoginLoggedInState value, $Res Function(_LoginLoggedInState) then) =
+      __$LoginLoggedInStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoginLoggedInStateCopyWithImpl<$Res>
+class __$LoginLoggedInStateCopyWithImpl<$Res>
     extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$_LoginLoggedInStateCopyWith<$Res> {
-  __$$_LoginLoggedInStateCopyWithImpl(
-      _$_LoginLoggedInState _value, $Res Function(_$_LoginLoggedInState) _then)
-      : super(_value, (v) => _then(v as _$_LoginLoggedInState));
+    implements _$LoginLoggedInStateCopyWith<$Res> {
+  __$LoginLoggedInStateCopyWithImpl(
+      _LoginLoggedInState _value, $Res Function(_LoginLoggedInState) _then)
+      : super(_value, (v) => _then(v as _LoginLoggedInState));
 
   @override
-  _$_LoginLoggedInState get _value => super._value as _$_LoginLoggedInState;
+  _LoginLoggedInState get _value => super._value as _LoginLoggedInState;
 }
 
 /// @nodoc
@@ -332,7 +352,7 @@ class _$_LoginLoggedInState implements _LoginLoggedInState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoginLoggedInState);
+        (other.runtimeType == runtimeType && other is _LoginLoggedInState);
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:gametime/router/router.gr.dart';
 import 'package:local_user/local_user.dart';
-import 'package:gametime/router/router.dart';
 
 import '../register_services.dart';
 

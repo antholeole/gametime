@@ -1,7 +1,5 @@
-import 'package:ferry/ferry.dart';
 import 'package:gql_client/src/token_manager.dart';
-import 'package:gql_exec/gql_exec.dart';
-import 'package:gql_http_link/gql_http_link.dart';
+import 'package:graphql/client.dart';
 
 class RefresherLink extends Link {
   final String _refreshFailKey;

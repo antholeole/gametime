@@ -18,7 +18,7 @@
             {
                 "type": "shell",
                 "label": "bootstrap",
-                "command": "touch ${workspaceRoot}/schema.graphql",
+                "command": "touch ${workspaceRoot:🐦 Mobile}/lib/schema.graphql",
                 "problemMatcher": []
             }
         ]

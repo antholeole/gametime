@@ -11,6 +11,13 @@
             "type": "dart"
         },
         {
+            "name": "[Dev - Chrome] Run App",
+            "program": "${workspaceRoot}/lib/launchers/main.dev.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": ["-d", "chrome"]
+        },
+        {
             "name": "[Dev - MacOS] Run App",
             "program": "${workspaceRoot}/lib/launchers/main.dev.dart",
             "request": "launch",

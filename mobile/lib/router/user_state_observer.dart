@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:gametime/configs/base_config.dart';
 import 'package:gametime/router/router.gr.dart';
 import 'package:local_user/local_user.dart';
 
@@ -6,7 +7,10 @@ import '../register_services.dart';
 
 class UserStateObserver extends AutoRouterObserver {
   final LocalUser _localUser = getIt<LocalUser>();
+  final Config _config = getIt<Config>();
   final AppRouter _router;
+
+  static const String _authScopeName = 'AUTH_DEP_INJECT_SCOPE';
 
   UserStateObserver(AppRouter router) : _router = router {
     _localUser.addListener(_didUpdateUserState);
@@ -14,11 +18,18 @@ class UserStateObserver extends AutoRouterObserver {
   }
 
   void _didUpdateUserState() {
-    _router.popUntilRoot();
-    _localUser.on(
-      loading: () => _router.popAndPush(const SplashRoute()),
-      loggedOut: (reason) => _router.popAndPush(const LoginRoute()),
-      loggedIn: (userId) => _router.popAndPush(const HomeRoute()),
-    );
+    _localUser.on(loading: () {
+      _router.replaceAll([SplashRoute()]);
+    }, loggedOut: (e) async {
+      _router.replaceAll([SplashRoute(exception: e)]);
+      await getIt.popScopesTill(_authScopeName);
+      _router.replaceAll([LoginRoute(exception: e)]);
+    }, loggedIn: (userId) {
+      getIt.pushNewScope(
+        init: (getIt) => registerAuthedServices(_config, getIt),
+        scopeName: _authScopeName,
+      );
+      _router.replaceAll([const HomeRoute()]);
+    });
   }
 }

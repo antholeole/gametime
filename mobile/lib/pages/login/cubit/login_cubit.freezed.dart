@@ -18,8 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LoginStateTearOff {
   const _$LoginStateTearOff();
 
-  _LoginPromptState prompting() {
-    return _LoginPromptState();
+  _LoginPromptState prompting({Exception? exception}) {
+    return _LoginPromptState(
+      exception: exception,
+    );
   }
 
   _LoginLoadingState loading() {
@@ -38,21 +40,21 @@ const $LoginState = _$LoginStateTearOff();
 mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() prompting,
+    required TResult Function(Exception? exception) prompting,
     required TResult Function() loading,
     required TResult Function() loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
     required TResult orElse(),
@@ -103,6 +105,7 @@ abstract class _$LoginPromptStateCopyWith<$Res> {
   factory _$LoginPromptStateCopyWith(
           _LoginPromptState value, $Res Function(_LoginPromptState) then) =
       __$LoginPromptStateCopyWithImpl<$Res>;
+  $Res call({Exception? exception});
 }
 
 /// @nodoc
@@ -115,57 +118,80 @@ class __$LoginPromptStateCopyWithImpl<$Res>
 
   @override
   _LoginPromptState get _value => super._value as _LoginPromptState;
+
+  @override
+  $Res call({
+    Object? exception = freezed,
+  }) {
+    return _then(_LoginPromptState(
+      exception: exception == freezed
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as Exception?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LoginPromptState implements _LoginPromptState {
-  _$_LoginPromptState();
+  _$_LoginPromptState({this.exception});
+
+  @override
+  final Exception? exception;
 
   @override
   String toString() {
-    return 'LoginState.prompting()';
+    return 'LoginState.prompting(exception: $exception)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _LoginPromptState);
+        (other.runtimeType == runtimeType &&
+            other is _LoginPromptState &&
+            const DeepCollectionEquality().equals(other.exception, exception));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(exception));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoginPromptStateCopyWith<_LoginPromptState> get copyWith =>
+      __$LoginPromptStateCopyWithImpl<_LoginPromptState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() prompting,
+    required TResult Function(Exception? exception) prompting,
     required TResult Function() loading,
     required TResult Function() loggedIn,
   }) {
-    return prompting();
+    return prompting(exception);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
   }) {
-    return prompting?.call();
+    return prompting?.call(exception);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
     required TResult orElse(),
   }) {
     if (prompting != null) {
-      return prompting();
+      return prompting(exception);
     }
     return orElse();
   }
@@ -206,7 +232,12 @@ class _$_LoginPromptState implements _LoginPromptState {
 }
 
 abstract class _LoginPromptState implements LoginState {
-  factory _LoginPromptState() = _$_LoginPromptState;
+  factory _LoginPromptState({Exception? exception}) = _$_LoginPromptState;
+
+  Exception? get exception;
+  @JsonKey(ignore: true)
+  _$LoginPromptStateCopyWith<_LoginPromptState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -250,7 +281,7 @@ class _$_LoginLoadingState implements _LoginLoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() prompting,
+    required TResult Function(Exception? exception) prompting,
     required TResult Function() loading,
     required TResult Function() loggedIn,
   }) {
@@ -260,7 +291,7 @@ class _$_LoginLoadingState implements _LoginLoadingState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
   }) {
@@ -270,7 +301,7 @@ class _$_LoginLoadingState implements _LoginLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
     required TResult orElse(),
@@ -361,7 +392,7 @@ class _$_LoginLoggedInState implements _LoginLoggedInState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() prompting,
+    required TResult Function(Exception? exception) prompting,
     required TResult Function() loading,
     required TResult Function() loggedIn,
   }) {
@@ -371,7 +402,7 @@ class _$_LoginLoggedInState implements _LoginLoggedInState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
   }) {
@@ -381,7 +412,7 @@ class _$_LoginLoggedInState implements _LoginLoggedInState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? prompting,
+    TResult Function(Exception? exception)? prompting,
     TResult Function()? loading,
     TResult Function()? loggedIn,
     required TResult orElse(),

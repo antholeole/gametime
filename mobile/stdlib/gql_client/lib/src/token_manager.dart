@@ -1,18 +1,11 @@
 import 'package:local_user/local_user.dart';
 import 'package:uuid_type/uuid_type.dart';
 
-typedef RequestRefresh = Future<String> Function(
-    UuidType userId, String refreshToken);
-
 class TokenManager {
   final LocalUser _localUser;
   String? _accessTokenCache;
-  final RequestRefresh _requestRefresh;
 
-  TokenManager(
-      {required LocalUser localUser, required RequestRefresh requestRefresh})
-      : _localUser = localUser,
-        _requestRefresh = requestRefresh;
+  TokenManager({required LocalUser localUser}) : _localUser = localUser;
 
   //returns an access token if authenticated; returns null if not authenticated.
   //throws an exception if refresh fails
@@ -31,7 +24,7 @@ class TokenManager {
 
     if (forceRefresh || _accessTokenCache == null) {
       try {
-        _accessTokenCache = await _requestRefresh(loggedInUserId, refreshToken);
+        throw Exception('now you gotta handle refreshes bub');
       } on Exception catch (e) {
         throw RefreshFailed.fromException(e);
       }

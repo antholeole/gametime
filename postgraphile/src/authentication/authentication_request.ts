@@ -1,4 +1,5 @@
 import { ExtensionDefinition, gql, makeExtendSchemaPlugin } from 'postgraphile'
+import crypto from 'crypto'
 
 interface AuthenticationResponse {
     accessToken: String,
@@ -14,7 +15,7 @@ export const AuthenticatePlugin = makeExtendSchemaPlugin(() => {
         }
 
         extend type Mutation {
-            authenticate(username: String, password: String): AuthenticationResponse
+            authenticate(token: String): AuthenticationResponse
         }
       `,
       resolvers: {
@@ -24,7 +25,7 @@ export const AuthenticatePlugin = makeExtendSchemaPlugin(() => {
 
               return {
                 accessToken: source,
-                refreshToken: 'tits'
+                refreshToken: crypto.randomBytes(64).toString('hex')
               }
             }
         }

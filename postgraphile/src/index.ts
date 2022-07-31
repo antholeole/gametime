@@ -4,6 +4,7 @@ import express from 'express'
 import { postgraphile, PostGraphileOptions } from 'postgraphile'
 import { translateAuthenticatedRequest } from './authentication/translate_authenticated_request'
 import { AuthenticatePlugin } from './authentication/authentication_request'
+import cors from 'cors'
 
 const app = express()
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, JWT_SECRET } = process.env
@@ -24,6 +25,10 @@ const config: PostGraphileOptions = process.env.NODE_ENV === 'dev' ? {
   disableQueryLog: true,
 }
 
+if (process.env.NODE_ENV === 'dev') {
+  app.use(cors())
+}
+
 app.use(
     postgraphile(
       connStr,
@@ -40,7 +45,7 @@ app.use(
         jwtSecret: JWT_SECRET,
         jwtPgTypeIdentifier: "public.jwt_token",
         appendPlugins: [
-          PgSimplifyInflectorPlugin, 
+          PgSimplifyInflectorPlugin,
           ConnectionFilterPlugin,
           AuthenticatePlugin
         ],

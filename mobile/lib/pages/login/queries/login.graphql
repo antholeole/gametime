@@ -1,0 +1,8 @@
+mutation Authenticate($token: String!) {
+  authenticate(
+    token: $token
+  ) {
+    accessToken,
+    refreshToken
+  }
+}

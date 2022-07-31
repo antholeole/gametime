@@ -12,7 +12,7 @@ Future<void> initalize(Config config) async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  registerServices(config);
+  registerBasicServices(getIt, config);
 
   runApp(MyApp());
 }

@@ -4,19 +4,19 @@ import 'package:local_user/local_user.dart';
 import 'package:http/http.dart' as http;
 import 'package:graphql/client.dart';
 
-Future<GraphQLClient> build(
-    {required LocalUser localUser,
-    required String refreshFailKey,
-    required RequestRefresh refreshRequest,
-    required Uri endpoint}) async {
-  final TokenManager tokenManager =
-      TokenManager(localUser: localUser, requestRefresh: refreshRequest);
+GraphQLClient buildGqlClient({
+  required bool authenticated,
+  required LocalUser localUser,
+  required Uri endpoint,
+}) {
+  final TokenManager tokenManager = TokenManager(localUser: localUser);
 
   final link = Link.from([
-    RefresherLink(
-      tokenManager: tokenManager,
-      refreshFailKey: refreshFailKey,
-    ),
+    if (authenticated)
+      RefresherLink(
+        tokenManager: tokenManager,
+        refreshFailKey: 'blah blah',
+      ),
     Link.split(
       (request) => request.isSubscription,
       WebSocketLink(endpoint.toString()),

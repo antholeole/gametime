@@ -34,3 +34,6 @@ class UuidType {
   static String toJson(UuidType uuidType) => uuidType._uuid;
   static UuidType fromJson(String uuidType) => UuidType(uuidType);
 }
+
+String uuidTypeToJson(UuidType uuidType) => uuidType._uuid;
+UuidType uuidTypeFromJson(dynamic uuidType) => UuidType.fromJson(uuidType);

@@ -16,7 +16,8 @@
     "njwt": "^1.2.0",
     "node-jose": "^2.1.1",
     "postgraphile": "^4.12.9",
-    "postgraphile-plugin-connection-filter": "^2.3.0"
+    "postgraphile-plugin-connection-filter": "^2.3.0",
+    "uuid-generator-ts": "^1.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

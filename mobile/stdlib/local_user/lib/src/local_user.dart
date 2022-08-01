@@ -3,7 +3,7 @@ import 'package:local_user/src/local_user_state.dart';
 import 'package:local_value/local_value.dart';
 import 'package:uuid_type/uuid_type.dart';
 
-class LocalUser extends ChangeNotifier
+class LocalUser<T> extends ChangeNotifier
     implements ValueListenable<LocalUserState> {
   final LocalSingleton<String> _localRefreshToken = LocalSingleton(
     id: 'refresh_token',
@@ -13,27 +13,31 @@ class LocalUser extends ChangeNotifier
     id: 'user_id',
     documentType: DocumentType.secure,
   );
+  final LocalSingleton<T> _userData;
 
   LocalUserState _state = LocalUserLoadingState();
 
+  LocalUser({required LocalSingleton<T> userData}) : _userData = userData;
+
   /// begins an async process that checks if the user is logged in or not.
   Future<void> determineState() async {
-    final List<String?> tokens;
+    final List<dynamic> localData;
     try {
-      tokens =
-          await Future.wait([_localRefreshToken.read(), _localUserId.read()]);
+      localData = await Future.wait(
+          [_localRefreshToken.read(), _localUserId.read(), _userData.read()]);
     } on Exception catch (e) {
       logOut(withException: e);
       return;
     }
 
-    final refreshToken = tokens[0];
-    final userId = tokens[1];
+    final String? refreshToken = localData[0];
+    final String? userId = localData[1];
+    final T? userData = localData[3];
 
-    if (refreshToken == null || userId == null) {
+    if (refreshToken == null || userId == null || userData == null) {
       logOut();
     } else {
-      logIn(UuidType(userId), refreshToken);
+      logIn(UuidType(userId), refreshToken, userData);
     }
   }
 
@@ -76,13 +80,14 @@ class LocalUser extends ChangeNotifier
     return loading();
   }
 
-  Future<void> logIn(UuidType userId, String refreshToken) async {
+  Future<void> logIn(UuidType userId, String refreshToken, T userData) async {
     final shouldNotify = _state is! LocalUserLoggedInState;
-    _state = LocalUserLoggedInState(userId);
+    _state = LocalUserLoggedInState(userId, userData);
 
     await Future.wait([
       _localRefreshToken.write(refreshToken),
-      _localUserId.write(userId.toString())
+      _localUserId.write(userId.toString()),
+      _userData.write(userData)
     ]);
 
     if (shouldNotify) {

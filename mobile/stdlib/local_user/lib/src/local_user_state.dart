@@ -4,10 +4,11 @@ abstract class LocalUserState {
   const LocalUserState();
 }
 
-class LocalUserLoggedInState extends LocalUserState {
+class LocalUserLoggedInState<T> extends LocalUserState {
   final UuidType userId;
+  final T extraData;
 
-  const LocalUserLoggedInState(this.userId);
+  const LocalUserLoggedInState(this.userId, this.extraData);
 }
 
 class LocalUserLoadingState extends LocalUserState {

@@ -4,6 +4,7 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid_type/uuid_type.dart';
 part 'login.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -191,23 +192,52 @@ const documentNodeMutationAuthenticate = DocumentNode(definitions: [
             alias: null,
             arguments: [
               ArgumentNode(
-                  name: NameNode(value: 'token'),
-                  value: VariableNode(name: NameNode(value: 'token')))
+                  name: NameNode(value: 'input'),
+                  value: ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                        name: NameNode(value: 'token'),
+                        value: VariableNode(name: NameNode(value: 'token')))
+                  ]))
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                  name: NameNode(value: 'accessToken'),
+                  name: NameNode(value: 'result'),
                   alias: null,
                   arguments: [],
                   directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'refreshToken'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'userId'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'accessToken'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'refreshToken'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'admin'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
               FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
@@ -405,17 +435,14 @@ class Mutation$Authenticate$Widget
 
 @JsonSerializable(explicitToJson: true)
 class Mutation$Authenticate$authenticate {
-  Mutation$Authenticate$authenticate(
-      {this.accessToken, this.refreshToken, required this.$__typename});
+  Mutation$Authenticate$authenticate({this.result, required this.$__typename});
 
   @override
   factory Mutation$Authenticate$authenticate.fromJson(
           Map<String, dynamic> json) =>
       _$Mutation$Authenticate$authenticateFromJson(json);
 
-  final String? accessToken;
-
-  final String? refreshToken;
+  final Mutation$Authenticate$authenticate$result? result;
 
   @JsonKey(name: '__typename')
   final String $__typename;
@@ -423,10 +450,9 @@ class Mutation$Authenticate$authenticate {
   Map<String, dynamic> toJson() =>
       _$Mutation$Authenticate$authenticateToJson(this);
   int get hashCode {
-    final l$accessToken = accessToken;
-    final l$refreshToken = refreshToken;
+    final l$result = result;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$accessToken, l$refreshToken, l$$__typename]);
+    return Object.hashAll([l$result, l$$__typename]);
   }
 
   @override
@@ -434,12 +460,9 @@ class Mutation$Authenticate$authenticate {
     if (identical(this, other)) return true;
     if (!(other is Mutation$Authenticate$authenticate) ||
         runtimeType != other.runtimeType) return false;
-    final l$accessToken = accessToken;
-    final lOther$accessToken = other.accessToken;
-    if (l$accessToken != lOther$accessToken) return false;
-    final l$refreshToken = refreshToken;
-    final lOther$refreshToken = other.refreshToken;
-    if (l$refreshToken != lOther$refreshToken) return false;
+    final l$result = result;
+    final lOther$result = other.result;
+    if (l$result != lOther$result) return false;
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) return false;
@@ -464,7 +487,9 @@ abstract class CopyWith$Mutation$Authenticate$authenticate<TRes> {
   factory CopyWith$Mutation$Authenticate$authenticate.stub(TRes res) =
       _CopyWithStubImpl$Mutation$Authenticate$authenticate;
 
-  TRes call({String? accessToken, String? refreshToken, String? $__typename});
+  TRes call(
+      {Mutation$Authenticate$authenticate$result? result, String? $__typename});
+  CopyWith$Mutation$Authenticate$authenticate$result<TRes> get result;
 }
 
 class _CopyWithImpl$Mutation$Authenticate$authenticate<TRes>
@@ -477,20 +502,22 @@ class _CopyWithImpl$Mutation$Authenticate$authenticate<TRes>
 
   static const _undefined = {};
 
-  TRes call(
-          {Object? accessToken = _undefined,
-          Object? refreshToken = _undefined,
-          Object? $__typename = _undefined}) =>
+  TRes call({Object? result = _undefined, Object? $__typename = _undefined}) =>
       _then(Mutation$Authenticate$authenticate(
-          accessToken: accessToken == _undefined
-              ? _instance.accessToken
-              : (accessToken as String?),
-          refreshToken: refreshToken == _undefined
-              ? _instance.refreshToken
-              : (refreshToken as String?),
+          result: result == _undefined
+              ? _instance.result
+              : (result as Mutation$Authenticate$authenticate$result?),
           $__typename: $__typename == _undefined || $__typename == null
               ? _instance.$__typename
               : ($__typename as String)));
+  CopyWith$Mutation$Authenticate$authenticate$result<TRes> get result {
+    final local$result = _instance.result;
+    return local$result == null
+        ? CopyWith$Mutation$Authenticate$authenticate$result.stub(
+            _then(_instance))
+        : CopyWith$Mutation$Authenticate$authenticate$result(
+            local$result, (e) => call(result: e));
+  }
 }
 
 class _CopyWithStubImpl$Mutation$Authenticate$authenticate<TRes>
@@ -499,6 +526,150 @@ class _CopyWithStubImpl$Mutation$Authenticate$authenticate<TRes>
 
   TRes _res;
 
-  call({String? accessToken, String? refreshToken, String? $__typename}) =>
+  call(
+          {Mutation$Authenticate$authenticate$result? result,
+          String? $__typename}) =>
+      _res;
+  CopyWith$Mutation$Authenticate$authenticate$result<TRes> get result =>
+      CopyWith$Mutation$Authenticate$authenticate$result.stub(_res);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Mutation$Authenticate$authenticate$result {
+  Mutation$Authenticate$authenticate$result(
+      {this.userId,
+      this.accessToken,
+      this.refreshToken,
+      this.admin,
+      required this.$__typename});
+
+  @override
+  factory Mutation$Authenticate$authenticate$result.fromJson(
+          Map<String, dynamic> json) =>
+      _$Mutation$Authenticate$authenticate$resultFromJson(json);
+
+  @JsonKey(
+      fromJson: _nullable$uuidTypeFromJson, toJson: _nullable$uuidTypeToJson)
+  final UuidType? userId;
+
+  final String? accessToken;
+
+  final String? refreshToken;
+
+  final bool? admin;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() =>
+      _$Mutation$Authenticate$authenticate$resultToJson(this);
+  int get hashCode {
+    final l$userId = userId;
+    final l$accessToken = accessToken;
+    final l$refreshToken = refreshToken;
+    final l$admin = admin;
+    final l$$__typename = $__typename;
+    return Object.hashAll(
+        [l$userId, l$accessToken, l$refreshToken, l$admin, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Mutation$Authenticate$authenticate$result) ||
+        runtimeType != other.runtimeType) return false;
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) return false;
+    final l$accessToken = accessToken;
+    final lOther$accessToken = other.accessToken;
+    if (l$accessToken != lOther$accessToken) return false;
+    final l$refreshToken = refreshToken;
+    final lOther$refreshToken = other.refreshToken;
+    if (l$refreshToken != lOther$refreshToken) return false;
+    final l$admin = admin;
+    final lOther$admin = other.admin;
+    if (l$admin != lOther$admin) return false;
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$Authenticate$authenticate$result
+    on Mutation$Authenticate$authenticate$result {
+  CopyWith$Mutation$Authenticate$authenticate$result<
+          Mutation$Authenticate$authenticate$result>
+      get copyWith =>
+          CopyWith$Mutation$Authenticate$authenticate$result(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$Authenticate$authenticate$result<TRes> {
+  factory CopyWith$Mutation$Authenticate$authenticate$result(
+          Mutation$Authenticate$authenticate$result instance,
+          TRes Function(Mutation$Authenticate$authenticate$result) then) =
+      _CopyWithImpl$Mutation$Authenticate$authenticate$result;
+
+  factory CopyWith$Mutation$Authenticate$authenticate$result.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$Authenticate$authenticate$result;
+
+  TRes call(
+      {UuidType? userId,
+      String? accessToken,
+      String? refreshToken,
+      bool? admin,
+      String? $__typename});
+}
+
+class _CopyWithImpl$Mutation$Authenticate$authenticate$result<TRes>
+    implements CopyWith$Mutation$Authenticate$authenticate$result<TRes> {
+  _CopyWithImpl$Mutation$Authenticate$authenticate$result(
+      this._instance, this._then);
+
+  final Mutation$Authenticate$authenticate$result _instance;
+
+  final TRes Function(Mutation$Authenticate$authenticate$result) _then;
+
+  static const _undefined = {};
+
+  TRes call(
+          {Object? userId = _undefined,
+          Object? accessToken = _undefined,
+          Object? refreshToken = _undefined,
+          Object? admin = _undefined,
+          Object? $__typename = _undefined}) =>
+      _then(Mutation$Authenticate$authenticate$result(
+          userId:
+              userId == _undefined ? _instance.userId : (userId as UuidType?),
+          accessToken: accessToken == _undefined
+              ? _instance.accessToken
+              : (accessToken as String?),
+          refreshToken: refreshToken == _undefined
+              ? _instance.refreshToken
+              : (refreshToken as String?),
+          admin: admin == _undefined ? _instance.admin : (admin as bool?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
+}
+
+class _CopyWithStubImpl$Mutation$Authenticate$authenticate$result<TRes>
+    implements CopyWith$Mutation$Authenticate$authenticate$result<TRes> {
+  _CopyWithStubImpl$Mutation$Authenticate$authenticate$result(this._res);
+
+  TRes _res;
+
+  call(
+          {UuidType? userId,
+          String? accessToken,
+          String? refreshToken,
+          bool? admin,
+          String? $__typename}) =>
       _res;
 }
+
+UuidType? _nullable$uuidTypeFromJson(dynamic data) =>
+    data == null ? null : uuidTypeFromJson(data);
+dynamic _nullable$uuidTypeToJson(UuidType? data) =>
+    data == null ? null : uuidTypeToJson(data);

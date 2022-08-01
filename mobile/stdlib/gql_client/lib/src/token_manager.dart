@@ -1,5 +1,4 @@
 import 'package:local_user/local_user.dart';
-import 'package:uuid_type/uuid_type.dart';
 
 class TokenManager {
   final LocalUser _localUser;

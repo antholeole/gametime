@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gametime/data/user_data.dart';
 import 'package:gametime/register_services.dart';
 import 'package:gametime/pages/login/queries/login.graphql.dart';
 import 'package:gql_client/gql_client.dart';
@@ -33,7 +34,11 @@ class LoginCubit extends Cubit<LoginState> {
 
     // Since we have no identity, there is no userId.
     await _localUser.logIn(
-        UuidType.generate(), result.parsedData!.authenticate!.refreshToken!);
+        UuidType.generate(),
+        result.parsedData!.authenticate!.result!.refreshToken!,
+        UserData(
+          admin: result.parsedData!.authenticate!.result!.admin!,
+        ));
 
     emit(LoginState.loggedIn());
   }

@@ -17,6 +17,7 @@ dependencies:
   toaster_next: ^1.1.0
   graphql: ^5.0.0
   graphql_flutter: ^5.1.1-beta.4
+  json_annotation: ^4.6.0
 
   uuid_type:
     path: ./stdlib/uuid_type

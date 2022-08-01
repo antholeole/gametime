@@ -2,12 +2,19 @@ import PgSimplifyInflectorPlugin from '@graphile-contrib/pg-simplify-inflector'
 import ConnectionFilterPlugin from 'postgraphile-plugin-connection-filter'
 import express from 'express'
 import { postgraphile, PostGraphileOptions } from 'postgraphile'
-import { translateAuthenticatedRequest } from './authentication/translate_authenticated_request'
-import { AuthenticatePlugin } from './authentication/authentication_request'
 import cors from 'cors'
 
 const app = express()
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, JWT_SECRET } = process.env
+const {
+  USER_SECRET,
+  ADMIN_SECRET,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_HOST,
+  POSTGRES_PORT,
+  JWT_SECRET
+ } = process.env
 const connStr = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`
 
 const config: PostGraphileOptions = process.env.NODE_ENV === 'dev' ? {
@@ -34,8 +41,9 @@ app.use(
       connStr,
       "public",
       {
-        pgSettings: req => ({
-          ...translateAuthenticatedRequest(req)
+        pgSettings: () => ({
+          'env.user_secret': USER_SECRET,
+          'env.admin_Secret': ADMIN_SECRET,
         }),
         enableQueryBatching: true,
         ignoreRBAC: false,
@@ -47,7 +55,6 @@ app.use(
         appendPlugins: [
           PgSimplifyInflectorPlugin,
           ConnectionFilterPlugin,
-          AuthenticatePlugin
         ],
         subscriptions: true,
         ...config,

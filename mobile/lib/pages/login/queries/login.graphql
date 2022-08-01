@@ -1,8 +1,14 @@
 mutation Authenticate($token: String!) {
   authenticate(
-    token: $token
+    input: {
+      token: $token
+    }
   ) {
-    accessToken,
-    refreshToken
+		result {
+      userId,
+      accessToken,
+      refreshToken,
+      admin
+    }
   }
 }

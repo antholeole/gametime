@@ -12,3 +12,5 @@ targets:
               fromJsonFunctionName: uuidTypeFromJson
               toJsonFunctionName: uuidTypeToJson
               import: package:uuid_type/uuid_type.dart
+            JwtToken:
+              type: String

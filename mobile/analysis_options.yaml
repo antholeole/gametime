@@ -3,4 +3,9 @@ include: package:flutter_lints/flutter.yaml
 exclude:
   - 'stdlib/**'
 
+analyzer:
+  exclude:
+    - "**/*.graphql.dart"
+    - "**/*.g.dart"
+
 linter:

@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "isBackground": true,
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/scripts"
+            },
+            "command": "sh all.sh",
+            "label": "run all daemons",
+            "problemMatcher": []
+        }
+    ]
+}

@@ -13,9 +13,10 @@ import 'package:gametime/pages/splash/splash_page.dart';
       transitionsBuilder: noAnimationTransition,
     ),
     CustomRoute(
-        page: LoginPage,
-        transitionsBuilder: noAnimationTransition,
-        path: '/login'),
+      page: LoginPage,
+      transitionsBuilder: noAnimationTransition,
+      path: '/login',
+    ),
     CustomRoute(
       page: HomePage,
       transitionsBuilder: noAnimationTransition,

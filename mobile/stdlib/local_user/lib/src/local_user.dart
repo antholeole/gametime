@@ -32,7 +32,7 @@ class LocalUser<T> extends ChangeNotifier
 
     final String? refreshToken = localData[0];
     final String? userId = localData[1];
-    final T? userData = localData[3];
+    final T? userData = localData[2];
 
     if (refreshToken == null || userId == null || userData == null) {
       logOut();
@@ -66,11 +66,13 @@ class LocalUser<T> extends ChangeNotifier
 
   K on<K>({
     required K Function(Exception? e) loggedOut,
-    required K Function(UuidType) loggedIn,
+    required K Function(UuidType, T) loggedIn,
     required K Function() loading,
   }) {
     if (_state is LocalUserLoggedInState) {
-      return loggedIn((_state as LocalUserLoggedInState).userId);
+      final LocalUserLoggedInState loggedInState =
+          _state as LocalUserLoggedInState;
+      return loggedIn(loggedInState.userId, loggedInState.extraData);
     }
 
     if (_state is LocalUserLoggedOutState) {
@@ -101,7 +103,11 @@ class LocalUser<T> extends ChangeNotifier
       return;
     }
 
-    await Future.wait([_localRefreshToken.delete(), _localUserId.delete()]);
+    await Future.wait([
+      _localRefreshToken.delete(),
+      _localUserId.delete(),
+      _userData.delete()
+    ]);
 
     _state = LocalUserLoggedOutState(withException: withException);
     notifyListeners();

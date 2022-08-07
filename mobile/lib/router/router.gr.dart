@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
 import 'package:flutter/widgets.dart' as _i7;
+import 'package:gametime/data/user_data.dart' as _i8;
 import 'package:gametime/pages/home/home_page.dart' as _i3;
 import 'package:gametime/pages/login/view/login_page.dart' as _i2;
 import 'package:gametime/pages/splash/splash_page.dart' as _i1;
@@ -46,9 +47,10 @@ class AppRouter extends _i4.RootStackRouter {
           barrierDismissible: false);
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return _i4.CustomPage<dynamic>(
           routeData: routeData,
-          child: const _i3.HomePage(),
+          child: _i3.HomePage(key: args.key, userData: args.userData),
           transitionsBuilder: _i6.noAnimationTransition,
           opaque: true,
           barrierDismissible: false);
@@ -112,8 +114,23 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [_i3.HomePage]
-class HomeRoute extends _i4.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '/home');
+class HomeRoute extends _i4.PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({_i7.Key? key, required _i8.UserData userData})
+      : super(HomeRoute.name,
+            path: '/home', args: HomeRouteArgs(key: key, userData: userData));
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key, required this.userData});
+
+  final _i7.Key? key;
+
+  final _i8.UserData userData;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key, userData: $userData}';
+  }
 }

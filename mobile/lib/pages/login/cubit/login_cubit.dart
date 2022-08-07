@@ -14,7 +14,7 @@ part 'login_cubit.freezed.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final GraphQLClient _gqlClient = getIt<GQLClient>();
-  final LocalUser _localUser = getIt<LocalUser>();
+  final LocalUser _localUser = getIt<LocalUser<UserData>>();
 
   LoginCubit({Exception? initalException})
       : super(LoginState.prompting(exception: initalException));

@@ -1,6 +1,7 @@
 {
     "files.exclude": {
         "mobile": true,
-        "postgraphile": true
+        "hasura": true,
+        "fns": true
     },
 }

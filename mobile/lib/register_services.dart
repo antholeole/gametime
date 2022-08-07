@@ -18,7 +18,7 @@ void registerBasicServices(GetIt getIt, Config config) {
           toJson: (json) => json.toJson())));
 
   getIt.registerSingleton<GQLClient>(buildGqlClient(
-    localUser: getIt<LocalUser>(),
+    localUser: getIt<LocalUser<UserData>>(),
     authenticated: false,
     endpoint: config.gqlEndpoint,
   ));
@@ -26,7 +26,7 @@ void registerBasicServices(GetIt getIt, Config config) {
 
 void registerAuthedServices(Config config, GetIt getIt) {
   getIt.registerSingleton<GQLClient>(buildGqlClient(
-    localUser: getIt<LocalUser>(),
+    localUser: getIt<LocalUser<UserData>>(),
     authenticated: true,
     endpoint: config.gqlEndpoint,
   ));

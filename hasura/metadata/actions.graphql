@@ -1,0 +1,11 @@
+type Mutation {
+  authenticate(
+    token: String!
+  ): AuthenticationOutput
+}
+
+type AuthenticationOutput {
+  access_token: String!
+  refresh_token: String!
+}
+

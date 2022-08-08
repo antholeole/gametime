@@ -1,1 +1,2 @@
+- "!include private_users.yaml"
 - "!include public_film.yaml"

@@ -5,7 +5,7 @@ use actix_web::{
     Error
 };
 use futures_util::future::LocalBoxFuture;
-use crate::errors::ServerError;
+use super::errors::ServerError;
 
 pub struct WebhookSecret;
 
@@ -66,7 +66,7 @@ where
 mod tests {
     use actix_web::{test, App, get, Responder, HttpResponse, dev::Service};
 
-    use crate::{webhook_secret_middleware::WEBHOOK_SECRET_KEY_HEADER_KEY};
+    use super::WEBHOOK_SECRET_KEY_HEADER_KEY;
 
     const RESP_STR: &str = "responded";
     const WEBHOOK_SECRET_KEY: &str = "SECRET KEY";

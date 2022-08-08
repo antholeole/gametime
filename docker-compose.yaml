@@ -22,6 +22,11 @@ services:
     - ./fns:/usr/src/app
     environment:
         WEBHOOK_SECRET_KEY: '${WEBHOOK_SECRET_KEY}'
+        ADMIN_LOGIN_SECRET: '${ADMIN_LOGIN_SECRET}'
+        USER_LOGIN_SECRET: '${USER_LOGIN_SECRET}'
+        HASURA_ENDPOINT: '${HASURA_ENDPOINT}'
+        HASURA_ADMIN_SECRET: '${ADMIN_SECRET}'
+        JWT_SECRET: '${JWT_SECRET}'
     command: cargo watch -x run
   hasura:
     image: hasura/graphql-engine:latest.cli-migrations-v3

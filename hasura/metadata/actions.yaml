@@ -1,6 +1,17 @@
-actions: []
+actions:
+  - name: authenticate
+    definition:
+      kind: synchronous
+      handler: '{{WEBHOOK_URL}}/auth/authenticate'
+      headers:
+        - name: WEBHOOK_SECRET_KEY
+          value_from_env: WEBHOOK_SECRET_KEY
+    permissions:
+      - role: unauthenticated
+    comment: returns an access token and refresh token if valid token passed in
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+    - name: AuthenticationOutput
   scalars: []

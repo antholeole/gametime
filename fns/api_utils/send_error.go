@@ -1,4 +1,4 @@
-package types
+package api_utils
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 
 type WebhookError struct {
 	Message    string            `json:"message"`
-	Code       string            `json:"Code"`
+	Code       string            `json:"code"`
 	Extensions map[string]string `json:"Extensions"`
 }
 
@@ -17,12 +17,13 @@ type WebhookError struct {
 // HTTP code has to be [400-499]. The user sent status code is in the
 // extensions.
 const HasuraErrorStatusCode = 400
+const CodeExtensionKey = "code"
 
 func SendHasuraError(ginContext *gin.Context, status int, message string, extensions *map[string]string) {
 	statusStr := fmt.Sprint(status)
 
 	defaultAndCustomExtensions := map[string]string{
-		"code": statusStr,
+		CodeExtensionKey: statusStr,
 	}
 
 	if extensions != nil {

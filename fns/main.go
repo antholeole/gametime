@@ -1,9 +1,9 @@
 package main
 
 import (
-	"net/http"
-
+	"local/auth"
 	"local/middleware"
+	"local/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,9 +13,11 @@ func main() {
 
 	api.Use(middleware.VerifyHasuraSent())
 
-	api.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
-	})
+	// services
+	hasuraClient := services.NewHasuraClient()
+	jwtClient := services.NewJwtClient()
+
+	auth.RegisterAllAuthRoutes(api, hasuraClient, jwtClient)
 
 	api.Run()
 }

@@ -27,40 +27,40 @@ const fakeHasuraWebhookSecret = "Im a Fake Secret"
 func TestNoHasuraHeader(t *testing.T) {
 	api := buildMockApi()
 
-	os.Setenv(HasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
+	os.Setenv(hasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
 
 	r := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)
 
 	api.ServeHTTP(r, req)
 
-	testUtils.VerifyWebhookError(t, r, MissingAuthHeaderMessage, InvalidHasuraHeaderStatus)
+	testUtils.VerifyWebhookError(t, r, missingAuthHeaderMessage, invalidHasuraHeaderStatus)
 }
 
 func TestInvalidHasuraHeader(t *testing.T) {
 	api := buildMockApi()
 
-	os.Setenv(HasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
+	os.Setenv(hasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
 
 	r := httptest.NewRecorder()
 
 	req, _ := http.NewRequest("GET", "/", nil)
-	req.Header.Add(HasuraWebhookKeyHeader, "Some incorrect key value")
+	req.Header.Add(hasuraWebhookKeyHeader, "Some incorrect key value")
 
 	api.ServeHTTP(r, req)
 
-	testUtils.VerifyWebhookError(t, r, IncorrectAuthHeaderMessage, InvalidHasuraHeaderStatus)
+	testUtils.VerifyWebhookError(t, r, incorrectAuthHeaderMessage, invalidHasuraHeaderStatus)
 }
 
 func TestValidHasuraHeader(t *testing.T) {
 	api := buildMockApi()
 
-	os.Setenv(HasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
+	os.Setenv(hasuraWebhookHeaderEnvKey, fakeHasuraWebhookSecret)
 
 	r := httptest.NewRecorder()
 
 	req, _ := http.NewRequest("GET", "/", nil)
-	req.Header.Add(HasuraWebhookKeyHeader, fakeHasuraWebhookSecret)
+	req.Header.Add(hasuraWebhookKeyHeader, fakeHasuraWebhookSecret)
 
 	api.ServeHTTP(r, req)
 

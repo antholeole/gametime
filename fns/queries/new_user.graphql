@@ -1,0 +1,8 @@
+mutation NewUser($admin: Boolean!) {
+  insert_private_users_one(object: {
+    admin: $admin
+  }) {
+    id,
+    refresh_token
+  }
+}

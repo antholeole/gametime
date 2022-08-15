@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"local/types"
+	apiUtils "local/api_utils"
 )
 
 func VerifyWebhookError(
@@ -15,12 +15,11 @@ func VerifyWebhookError(
 	message string,
 	code int,
 ) {
-	if statusCode := r.Result().StatusCode; statusCode != types.HasuraErrorStatusCode {
+	if statusCode := r.Result().StatusCode; statusCode != apiUtils.HasuraErrorStatusCode {
 		t.Errorf(fmt.Sprintf("Http Response did not get denied (got %d)", statusCode))
 	}
 
-	var serverSentMessage types.WebhookError
-
+	var serverSentMessage apiUtils.WebhookError
 	err := json.Unmarshal(r.Body.Bytes(), &serverSentMessage)
 
 	if err != nil {

@@ -5,27 +5,27 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"local/types"
+	apiUtils "local/api_utils"
 )
 
-const HasuraWebhookKeyHeader string = "WEBHOOK_SECRET_KEY"
-const HasuraWebhookHeaderEnvKey string = "WEBHOOK_SECRET_KEY"
+const hasuraWebhookKeyHeader string = "WEBHOOK_SECRET_KEY"
+const hasuraWebhookHeaderEnvKey string = "WEBHOOK_SECRET_KEY"
 
-const InvalidHasuraHeaderStatus int = 401
-const MissingAuthHeaderMessage string = "Missing required authentication header"
-const IncorrectAuthHeaderMessage string = "Incorrect authentication header"
+const invalidHasuraHeaderStatus int = 401
+const missingAuthHeaderMessage string = "Missing required authentication header"
+const incorrectAuthHeaderMessage string = "Incorrect authentication header"
 
 func VerifyHasuraSent() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		header_token := c.GetHeader(HasuraWebhookKeyHeader)
+		header_token := c.GetHeader(hasuraWebhookKeyHeader)
 
 		if header_token == "" {
-			types.SendHasuraError(c, InvalidHasuraHeaderStatus, MissingAuthHeaderMessage, nil)
+			apiUtils.SendHasuraError(c, invalidHasuraHeaderStatus, missingAuthHeaderMessage, nil)
 			return
 		}
 
-		if header_token != os.Getenv(HasuraWebhookHeaderEnvKey) {
-			types.SendHasuraError(c, InvalidHasuraHeaderStatus, IncorrectAuthHeaderMessage, nil)
+		if header_token != os.Getenv(hasuraWebhookHeaderEnvKey) {
+			apiUtils.SendHasuraError(c, invalidHasuraHeaderStatus, incorrectAuthHeaderMessage, nil)
 			return
 		}
 

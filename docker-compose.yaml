@@ -14,20 +14,22 @@ services:
         POSTGRES_PORT: ${POSTGRES_PORT}
     ports:
         - 5433:${POSTGRES_PORT}
-  actix:
-    build: fns
+  fns:
+    build:
+      context: fns
+      target: dev
     ports:
-     - 3000:3000
+     - ${API_PORT}:${API_PORT}
     volumes:
-    - ./fns:/usr/src/app
+    - ./fns:/opt/app/api
     environment:
+        PORT: '${API_PORT}'
         WEBHOOK_SECRET_KEY: '${WEBHOOK_SECRET_KEY}'
         ADMIN_LOGIN_SECRET: '${ADMIN_LOGIN_SECRET}'
         USER_LOGIN_SECRET: '${USER_LOGIN_SECRET}'
         HASURA_ENDPOINT: '${HASURA_ENDPOINT}'
         HASURA_ADMIN_SECRET: '${ADMIN_SECRET}'
         JWT_SECRET: '${JWT_SECRET}'
-    command: cargo watch -x run
   hasura:
     image: hasura/graphql-engine:latest.cli-migrations-v3
     ports:

@@ -38,6 +38,8 @@ dev_dependencies:
   freezed: ^1.1.1
   json_serializable: ^6.3.1
   graphql_codegen: ^0.10.3
+  bloc_test: ^9.1.0
+  mocktail: ^0.3.0
 
 
 flutter:

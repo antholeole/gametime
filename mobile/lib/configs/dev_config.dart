@@ -6,6 +6,6 @@ class DevConfig extends Config {
         scheme: 'http',
         host: 'localhost',
         port: 8080,
-        pathSegments: ['graphql'],
+        pathSegments: ['v1', 'graphql'],
       );
 }

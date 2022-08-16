@@ -7,7 +7,7 @@ targets:
             - graphql
             - graphql_flutter
           scalars:
-            UUID:
+            uuid:
               type: UuidType
               fromJsonFunctionName: uuidTypeFromJson
               toJsonFunctionName: uuidTypeToJson

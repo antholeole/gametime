@@ -7,14 +7,13 @@ import 'package:gametime/pages/login/queries/login.graphql.dart';
 import 'package:gql_client/gql_client.dart';
 import 'package:graphql/client.dart';
 import 'package:local_user/local_user.dart';
-import 'package:uuid_type/uuid_type.dart';
 
 part 'login_state.dart';
 part 'login_cubit.freezed.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final GraphQLClient _gqlClient = getIt<GQLClient>();
-  final LocalUser _localUser = getIt<LocalUser<UserData>>();
+  final LocalUser<UserData> _localUser = getIt<LocalUser<UserData>>();
 
   LoginCubit({Exception? initalException})
       : super(LoginState.prompting(exception: initalException));
@@ -23,8 +22,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginState.loading());
 
     final result = await _gqlClient.mutate$Authenticate(
-        Options$Mutation$Authenticate(
-            variables: Variables$Mutation$Authenticate(token: loginToken)));
+      Options$Mutation$Authenticate(
+        variables: Variables$Mutation$Authenticate(token: loginToken),
+      ),
+    );
 
     if (result.exception != null) {
       emit(LoginState.prompting(
@@ -32,12 +33,11 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
 
-    // Since we have no identity, there is no userId.
     await _localUser.logIn(
-        UuidType.generate(),
-        result.parsedData!.authenticate!.result!.refreshToken!,
+        result.parsedData!.authenticate!.id,
+        result.parsedData!.authenticate!.refresh_token,
         UserData(
-          admin: result.parsedData!.authenticate!.result!.admin!,
+          admin: result.parsedData!.authenticate!.admin,
         ));
 
     emit(LoginState.loggedIn());

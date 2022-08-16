@@ -2,6 +2,8 @@
     "files.exclude": {
         "mobile": true,
         "hasura": true,
-        "fns": true
+        "fns": true,
+        ".s3bucket": true,
+        "package-lock.json": true
     },
 }

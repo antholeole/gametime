@@ -9,9 +9,18 @@ actions:
     permissions:
       - role: unauthenticated
     comment: returns an access token and refresh token if valid token passed in
+  - name: upload_film
+    definition:
+      kind: synchronous
+      handler: '{{WEBHOOK_URL}}/film/upload'
+      headers:
+        - name: WEBHOOK_SECRET_KEY
+          value_from_env: WEBHOOK_SECRET_KEY
+    comment: gets a link to upload film
 custom_types:
   enums: []
   input_objects: []
   objects:
     - name: AuthenticationOutput
+    - name: UploadFilmOutput
   scalars: []

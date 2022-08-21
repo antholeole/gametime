@@ -27,12 +27,10 @@ type jwtClaims struct {
 
 const jwtSecretEnvKey = "JWT_SECRET"
 
-func NewJwtClient() *JwtClient {
-	var j JwtClient = jwtClient{
+func NewJwtClient() JwtClient {
+	return jwtClient{
 		hmacKey: []byte(os.Getenv(jwtSecretEnvKey)),
 	}
-
-	return &j
 }
 
 func (c jwtClient) Sign(claims *JwtClaims) (string, error) {

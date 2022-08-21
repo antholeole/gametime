@@ -3,7 +3,7 @@
         "mobile": true,
         "hasura": true,
         "fns": true,
-        ".s3bucket": true,
+        //".s3bucket": true,
         "package-lock.json": true
     },
 }

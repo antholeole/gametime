@@ -25,7 +25,7 @@ func buildMockApi(gqlC graphql.Client, jwtC services.JwtClient) *gin.Engine {
 	api := gin.Default()
 	authRouter := api.Group("/auth")
 
-	authenticateRoute(authRouter, &gqlC, &jwtC)
+	authenticateRoute(authRouter, &gqlC, jwtC)
 
 	return api
 }

@@ -10,7 +10,7 @@ import (
 func RegisterAllAuthRoutes(
 	engine *gin.Engine,
 	gqlClient *graphql.Client,
-	jwtClient *services.JwtClient,
+	jwtClient services.JwtClient,
 ) {
 	authRouter := engine.Group("/auth")
 

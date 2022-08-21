@@ -10,7 +10,7 @@ import (
 type WebhookError struct {
 	Message    string            `json:"message"`
 	Code       string            `json:"code"`
-	Extensions map[string]string `json:"Extensions"`
+	Extensions map[string]string `json:"extensions"`
 }
 
 // Hasura mandates that for a webhook to be classified as an error, the

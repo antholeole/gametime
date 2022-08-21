@@ -30,8 +30,12 @@ services:
         HASURA_ENDPOINT: ${HASURA_ENDPOINT}
         HASURA_ADMIN_SECRET: ${ADMIN_SECRET}
         JWT_SECRET: ${JWT_SECRET}
-        S3_ACCESS_KEY: ${S3_ADMIN_KEY}
-        S3_SECRET: ${S3_ADMIN_SECRET}
+        OBJECT_STORAGE_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY}
+        OBJECT_STORAGE_ACCESS_SECRET: ${OBJECT_STORAGE_ACCESS_SECRET}
+        BUCKET_NAME: ${BUCKET_NAME}
+        OBJECT_STORAGE_ADDRESS: ${OBJECT_STORAGE_ADDRESS}
+        OBJECT_STORAGE_REGION: ${OBJECT_STORAGE_REGION}
+        OBJECT_STORAGE_USE_SSL: ${OBJECT_STORAGE_USE_SSL}
   hasura:
     image: hasura/graphql-engine:latest.cli-migrations-v3
     ports:
@@ -55,14 +59,15 @@ services:
       - ./hasura/metadata:/metadata
   bucket:
     image: quay.io/minio/minio:RELEASE.2022-08-13T21-54-44Z
-    command: server --address "0.0.0.0:9001" /${S3_BUCKET_NAME}
+    command: server --address "0.0.0.0:9001" /${BUCKET_NAME}
     ports:
       - 9001:9001
     hostname: minio1
     environment:
-      MINIO_ROOT_USER: ${S3_ADMIN_KEY}
-      MINIO_ROOT_PASSWORD: ${S3_ADMIN_SECRET}
+      MINIO_ROOT_USER: ${OBJECT_STORAGE_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${OBJECT_STORAGE_ACCESS_SECRET}
+      MINIO_SITE_REGION: ${OBJECT_STORAGE_REGION}
     volumes:
-      - .s3bucket:/${S3_BUCKET_NAME}
+      - .s3bucket:/${BUCKET_NAME}
 volumes:
   db_data:

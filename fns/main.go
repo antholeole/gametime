@@ -1,8 +1,9 @@
 package main
 
 import (
-	"local/auth"
 	"local/middleware"
+	"local/routers/auth"
+	"local/routers/film"
 	"local/services"
 
 	"github.com/gin-gonic/gin"
@@ -16,8 +17,10 @@ func main() {
 	// services
 	hasuraClient := services.NewHasuraClient()
 	jwtClient := services.NewJwtClient()
+	objectStorageClient := services.NewObjectStorageClient()
 
 	auth.RegisterAllAuthRoutes(api, hasuraClient, jwtClient)
+	film.RegisterAllFilmRoutes(api, hasuraClient, objectStorageClient)
 
 	api.Run()
 }

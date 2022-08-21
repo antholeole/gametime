@@ -4,8 +4,19 @@ type Mutation {
   ): AuthenticationOutput
 }
 
+type Mutation {
+  upload_film(
+    name: String!
+    comment: String!
+  ): UploadFilmOutput
+}
+
 type AuthenticationOutput {
   access_token: String!
   refresh_token: String!
+}
+
+type UploadFilmOutput {
+  upload_url: String!
 }
 

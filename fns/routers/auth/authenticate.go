@@ -30,7 +30,7 @@ type authenticateResponse struct {
 func authenticateRoute(
 	rg *gin.RouterGroup,
 	gqlClient *graphql.Client,
-	jwtClient *services.JwtClient,
+	jwtClient services.JwtClient,
 ) {
 	rg.POST("/authenticate", func(c *gin.Context) {
 		var input apiUtils.HasuraInboundRequest[authenticateInput]
@@ -56,7 +56,7 @@ func authenticateRoute(
 			return
 		}
 
-		a, err := (*jwtClient).Sign(&services.JwtClaims{
+		a, err := jwtClient.Sign(&services.JwtClaims{
 			UserId: resp.Insert_private_users_one.Id,
 			Admin:  isAdmin,
 		})

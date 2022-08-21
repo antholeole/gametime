@@ -1,0 +1,11 @@
+mutation NewFilm(
+  $comment: String,
+  $title: String!
+) {
+  insert_film_one(object: {
+    comment: $comment,
+    title: $title
+  }) {
+    id
+  }
+}

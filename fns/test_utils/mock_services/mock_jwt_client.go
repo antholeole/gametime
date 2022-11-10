@@ -11,7 +11,7 @@ type FakeJwtClient struct {
 	mock.Mock
 }
 
-func (j FakeJwtClient) Sign(claims *services.JwtClaims) (string, error) {
-	args := j.Called(claims)
+func (j FakeJwtClient) Sign(userId string, isAdmin bool) (string, error) {
+	args := j.Called(userId, isAdmin)
 	return args.String(0), args.Error(1)
 }

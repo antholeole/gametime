@@ -8,24 +8,28 @@ import (
 )
 
 type JwtClient interface {
-	Sign(claims *JwtClaims) (string, error)
+	Sign(userId string, Admin bool) (string, error)
 }
 
 type jwtClient struct {
 	hmacKey []byte
 }
 
-type JwtClaims struct {
-	UserId string `json:"user_id"`
-	Admin  bool   `json:"admin"`
+type hasuraClaims struct {
+	DefaultRole  string   `json:"x-hasura-default-role"`
+	AllowedRoles []string `json:"x-hasura-allowed-roles"`
+	UserId       string   `json:"x-hasura-user-id"`
 }
 
 type jwtClaims struct {
-	JwtClaims
+	HasuraClaims hasuraClaims `json:"https://hasura.io/jwt/claims"`
 	jwt.RegisteredClaims
 }
 
 const jwtSecretEnvKey = "JWT_SECRET"
+
+const userRole = "user"
+const adminRole = "team_admin"
 
 func NewJwtClient() JwtClient {
 	return jwtClient{
@@ -33,9 +37,23 @@ func NewJwtClient() JwtClient {
 	}
 }
 
-func (c jwtClient) Sign(claims *JwtClaims) (string, error) {
+func (c jwtClient) Sign(userId string, admin bool) (string, error) {
+	allowedRoles := []string{userRole}
+	var defaultRole string
+
+	if admin {
+		allowedRoles = append(allowedRoles, adminRole)
+		defaultRole = adminRole
+	} else {
+		defaultRole = userRole
+	}
+
 	j := jwtClaims{
-		*claims,
+		hasuraClaims{
+			DefaultRole:  defaultRole,
+			AllowedRoles: allowedRoles,
+			UserId:       userId,
+		},
 		jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
 		},

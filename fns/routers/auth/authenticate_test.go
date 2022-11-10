@@ -57,7 +57,7 @@ func TestValidAdminInputToken(t *testing.T) {
 
 	os.Setenv(adminLoginTokenEnvKey, fakeInputToken)
 	gqlC.On("MakeRequest", mock.Anything, mock.Anything, mock.Anything).Return(nil)
-	jwtC.On("Sign", mock.Anything).Return(fakeAccessToken, nil)
+	jwtC.On("Sign", mock.Anything, mock.Anything).Return(fakeAccessToken, nil)
 
 	req, _ := http.NewRequest("POST", authRoutePath, bytes.NewReader(jsonBody))
 	api.ServeHTTP(r, req)
@@ -94,7 +94,7 @@ func TestValidUserInputToken(t *testing.T) {
 
 	os.Setenv(userLoginTokenEnvKey, fakeInputToken)
 	gqlC.On("MakeRequest", mock.Anything, mock.Anything, mock.Anything).Return(nil)
-	jwtC.On("Sign", mock.Anything).Return(fakeAccessToken, nil)
+	jwtC.On("Sign", mock.Anything, mock.Anything).Return(fakeAccessToken, nil)
 
 	req, _ := http.NewRequest("POST", authRoutePath, bytes.NewReader(jsonBody))
 	api.ServeHTTP(r, req)

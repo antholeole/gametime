@@ -16,6 +16,8 @@ actions:
       headers:
         - name: WEBHOOK_SECRET_KEY
           value_from_env: WEBHOOK_SECRET_KEY
+    permissions:
+      - role: team_admin
     comment: gets a link to upload film
 custom_types:
   enums: []

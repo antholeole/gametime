@@ -1,3 +1,12 @@
 table:
   name: film
   schema: public
+select_permissions:
+  - role: team_admin
+    permission:
+      columns: []
+      filter: {}
+  - role: user
+    permission:
+      columns: []
+      filter: {}

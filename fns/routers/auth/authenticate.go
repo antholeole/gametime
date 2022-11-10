@@ -56,10 +56,7 @@ func authenticateRoute(
 			return
 		}
 
-		a, err := jwtClient.Sign(&services.JwtClaims{
-			UserId: resp.Insert_private_users_one.Id,
-			Admin:  isAdmin,
-		})
+		a, err := jwtClient.Sign(resp.Insert_private_users_one.Id, isAdmin)
 
 		if err != nil {
 			apiUtils.SendHasuraError(c, 500, fmt.Sprintf("Error encoding access token: %s", fmt.Sprint(err)), nil)

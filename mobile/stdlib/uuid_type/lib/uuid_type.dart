@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 class UuidType {
@@ -37,3 +38,13 @@ class UuidType {
 
 String uuidTypeToJson(UuidType uuidType) => uuidType._uuid;
 UuidType uuidTypeFromJson(dynamic uuidType) => UuidType.fromJson(uuidType);
+
+class UuidJsonTypeConverter implements JsonConverter<UuidType, String> {
+  const UuidJsonTypeConverter();
+
+  @override
+  UuidType fromJson(String json) => uuidTypeFromJson(json);
+
+  @override
+  String toJson(UuidType json) => uuidTypeToJson(json);
+}

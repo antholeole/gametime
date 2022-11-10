@@ -32,6 +32,7 @@ const fakeId = "fakeId"
 const fakeFilmName = "fakeFilmName"
 const fakeFilmComment = "fakeFilmComment"
 const fakeSigningLink = "fakeSigningLink"
+const fakeContentLength = 10001001
 
 func TestValidUpload(t *testing.T) {
 	var resp graphql.Response = graphql.Response{
@@ -48,13 +49,15 @@ func TestValidUpload(t *testing.T) {
 	r := httptest.NewRecorder()
 	jsonBody, _ := json.Marshal(apiUtils.HasuraInboundRequest[newFilmInput]{
 		Input: newFilmInput{
-			Name:    fakeFilmName,
-			Comment: fakeFilmComment,
+			Name:          fakeFilmName,
+			Comment:       fakeFilmComment,
+			ContentType:   supportedContentTypes[0],
+			ContentLength: fakeContentLength,
 		},
 	})
 
 	gqlC.On("MakeRequest", mock.Anything, mock.Anything, mock.Anything).Return(resp)
-	osC.On("Sign", mock.Anything).Return(fakeSigningLink, nil)
+	osC.On("Sign", fakeId, supportedContentTypes[0], fakeContentLength).Return(fakeSigningLink, nil)
 
 	req, _ := http.NewRequest("POST", filmRoutePath, bytes.NewReader(jsonBody))
 	api.ServeHTTP(r, req)

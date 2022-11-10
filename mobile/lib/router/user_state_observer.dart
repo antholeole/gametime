@@ -7,7 +7,7 @@ import 'package:local_user/local_user.dart';
 import '../register_services.dart';
 
 class UserStateObserver extends AutoRouterObserver {
-  final LocalUser _localUser = getIt<LocalUser<UserData>>();
+  final LocalUser<UserData> _localUser = getIt<LocalUser<UserData>>();
   final Config _config = getIt<Config>();
   final AppRouter _router;
 

@@ -13,7 +13,7 @@ import (
 )
 
 type ObjectStorageClient interface {
-	Sign(key string) (string, error)
+	Sign(key string, contentType string, size int64) (string, error)
 }
 
 // We're using the S3 client, but this should work with any
@@ -22,12 +22,14 @@ type objectStorageClient struct {
 	objectService *s3.S3
 }
 
-func (oss objectStorageClient) Sign(key string) (string, error) {
+func (oss objectStorageClient) Sign(key string, contentType string, size int64) (string, error) {
 	b := os.Getenv("BUCKET_NAME")
 
 	req, _ := oss.objectService.PutObjectRequest(&s3.PutObjectInput{
-		Bucket: &b,
-		Key:    &key,
+		Bucket:        &b,
+		Key:           &key,
+		ContentType:   &contentType,
+		ContentLength: &size,
 	})
 
 	urlStr, err := req.Presign(15 * time.Minute)

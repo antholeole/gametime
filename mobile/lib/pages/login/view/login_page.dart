@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
                             loggedIn: () => Text('Successfully Logged In!',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .bodyText2!
+                                    .bodyMedium!
                                     .copyWith(
                                       color: CupertinoColors.systemGreen,
                                     )))),

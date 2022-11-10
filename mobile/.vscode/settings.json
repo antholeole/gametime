@@ -1,6 +1,6 @@
 {
     "files.exclude": {
-        "**/*.gr.dart": true,
+        //"**/*.gr.dart": true,
         "**/*.freezed.dart": true,
         "**/*.graphql.dart": true,
         "**/*.g.dart": true

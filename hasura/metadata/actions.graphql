@@ -7,13 +7,15 @@ type Mutation {
 type Mutation {
   upload_film(
     name: String!
-    comment: String!
+    comment: String
   ): UploadFilmOutput
 }
 
 type AuthenticationOutput {
   access_token: String!
   refresh_token: String!
+  admin: Boolean!
+  id: uuid!
 }
 
 type UploadFilmOutput {

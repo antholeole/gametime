@@ -13,24 +13,29 @@ class UserStateObserver extends AutoRouterObserver {
 
   static const String _authScopeName = 'AUTH_DEP_INJECT_SCOPE';
 
+  //SIDE EFFECT: immediately calls determine state on localUser.
   UserStateObserver(AppRouter router) : _router = router {
     _localUser.addListener(_didUpdateUserState);
     _localUser.determineState();
   }
 
   void _didUpdateUserState() {
-    _localUser.on(loading: () {
-      _router.replaceAll([SplashRoute()]);
-    }, loggedOut: (e) async {
-      _router.replaceAll([SplashRoute(exception: e)]);
-      await getIt.popScopesTill(_authScopeName);
-      _router.replaceAll([LoginRoute(exception: e)]);
-    }, loggedIn: (userId, userData) {
-      getIt.pushNewScope(
-        init: (getIt) => registerAuthedServices(_config, getIt),
-        scopeName: _authScopeName,
-      );
-      _router.replaceAll([HomeRoute(userData: userData)]);
-    });
+    _localUser.on<Future<void>>(
+      loading: () async {
+        _router.replaceAll([SplashRoute()]);
+      },
+      loggedOut: (e) async {
+        _router.replaceAll([SplashRoute(exception: e)]);
+        await getIt.popScopesTill(_authScopeName);
+        _router.replaceAll([LoginRoute(exception: e)]);
+      },
+      loggedIn: (userId, userData) async {
+        getIt.pushNewScope(
+          init: (getIt) => registerAuthedServices(_config, getIt),
+          scopeName: _authScopeName,
+        );
+        _router.replaceAll([HomeRoute(userData: userData)]);
+      },
+    );
   }
 }

@@ -23,8 +23,11 @@ class LocalUser<T> extends ChangeNotifier
   Future<void> determineState() async {
     final List<dynamic> localData;
     try {
-      localData = await Future.wait(
-          [_localRefreshToken.read(), _localUserId.read(), _userData.read()]);
+      localData = await Future.wait([
+        _localRefreshToken.read(),
+        _localUserId.read(),
+        _userData.read(),
+      ]);
     } on Exception catch (e) {
       logOut(withException: e);
       return;

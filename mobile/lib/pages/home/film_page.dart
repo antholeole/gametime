@@ -23,8 +23,6 @@ class HomePage extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final g = getIt;
-
     return Stack(
       children: [
         Scaffold(

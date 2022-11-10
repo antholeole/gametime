@@ -10,12 +10,16 @@ final getIt = GetIt.I;
 
 void registerBasicServices(GetIt getIt, Config config) {
   getIt.registerSingleton<Config>(config);
-  getIt.registerSingleton<LocalUser<UserData>>(LocalUser<UserData>(
+  getIt.registerSingleton<LocalUser<UserData>>(
+    LocalUser<UserData>(
       userData: LocalSingleton<UserData>(
-          id: 'local_user_data',
-          documentType: DocumentType.document,
-          fromJson: UserData.fromJson,
-          toJson: (json) => json.toJson())));
+        id: 'local_user_data',
+        documentType: DocumentType.document,
+        fromJson: UserData.fromJson,
+        toJson: (json) => json.toJson(),
+      ),
+    ),
+  );
 
   getIt.registerSingleton<GQLClient>(buildGqlClient(
     localUser: getIt<LocalUser<UserData>>(),

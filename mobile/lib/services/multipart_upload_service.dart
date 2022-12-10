@@ -12,8 +12,11 @@ class MultipartUploadService {
     }
 
     var request = http.MultipartRequest("PUT", Uri.parse(url));
-    request.files.add(await http.MultipartFile.fromPath('package', filePath,
-        contentType: MediaType("blah", "blah")));
+    request.files.add(await http.MultipartFile.fromPath(
+      'package',
+      filePath,
+      contentType: MediaType("blah", "blah"),
+    ));
   }
 }
 

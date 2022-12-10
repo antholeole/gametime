@@ -15,11 +15,10 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 import 'package:flutter/widgets.dart' as _i8;
 import 'package:gametime/data/user_data.dart' as _i9;
-import 'package:gametime/pages/home/features/widgets/upload_film_modal.dart'
-    as _i4;
 import 'package:gametime/pages/home/film_page.dart' as _i3;
 import 'package:gametime/pages/login/view/login_page.dart' as _i2;
 import 'package:gametime/pages/splash/splash_page.dart' as _i1;
+import 'package:gametime/pages/watch/view/watch_page.dart' as _i4;
 import 'package:gametime/router/router.dart' as _i7;
 
 class AppRouter extends _i5.RootStackRouter {
@@ -69,10 +68,10 @@ class AppRouter extends _i5.RootStackRouter {
         barrierDismissible: false,
       );
     },
-    UploadFilmModal.name: (routeData) {
+    WatchRoute.name: (routeData) {
       return _i5.CustomPage<dynamic>(
         routeData: routeData,
-        child: const _i4.UploadFilmModal(),
+        child: const _i4.WatchPage(),
         opaque: true,
         barrierDismissible: false,
       );
@@ -94,8 +93,8 @@ class AppRouter extends _i5.RootStackRouter {
           path: '/home',
           children: [
             _i5.RouteConfig(
-              UploadFilmModal.name,
-              path: 'upload',
+              WatchRoute.name,
+              path: 'watch-page',
               parent: HomeRoute.name,
             )
           ],
@@ -208,13 +207,13 @@ class HomeRouteArgs {
 }
 
 /// generated route for
-/// [_i4.UploadFilmModal]
-class UploadFilmModal extends _i5.PageRouteInfo<void> {
-  const UploadFilmModal()
+/// [_i4.WatchPage]
+class WatchRoute extends _i5.PageRouteInfo<void> {
+  const WatchRoute()
       : super(
-          UploadFilmModal.name,
-          path: 'upload',
+          WatchRoute.name,
+          path: 'watch-page',
         );
 
-  static const String name = 'UploadFilmModal';
+  static const String name = 'WatchRoute';
 }

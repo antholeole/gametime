@@ -37,8 +37,8 @@ class HomePage extends StatelessWidget implements AutoRouteWrapper {
                   icon: const Icon(Icons.logout))
             ],
           ),
+          body: const AutoRouter(),
         ),
-        const AutoRouter(),
       ],
     );
   }

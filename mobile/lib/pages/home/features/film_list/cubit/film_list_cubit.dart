@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gametime/data/film.dart';
@@ -8,7 +5,6 @@ import 'package:gametime/pages/home/features/film_list/data/film_upload_payload.
 import 'package:gametime/register_services.dart';
 import 'package:gql_client/gql_client.dart';
 import 'package:graphql/client.dart';
-import 'package:http/http.dart' as http;
 import 'package:gametime/pages/home/features/film_list/queries/upload_film.graphql.dart';
 
 part 'film_list_state.dart';

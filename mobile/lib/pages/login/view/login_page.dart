@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gametime/pages/login/cubit/login_cubit.dart';
-import 'package:gametime/pages/login/view/widgets/login_field.dart';
 import 'package:gametime/theme/loader.dart';
 import 'package:gametime/theme/logo.dart';
+import 'package:gametime/pages/login/view/widgets/sign_in_with_provider_button.dart';
 
 class LoginPage extends StatelessWidget implements AutoRouteWrapper {
   final Exception? exception;
@@ -34,7 +34,14 @@ class LoginPage extends StatelessWidget implements AutoRouteWrapper {
                     const Logo(),
                     BlocBuilder<LoginCubit, LoginState>(
                         builder: (context, state) => state.when(
-                            prompting: (e) => LoginField(exception: e),
+                            prompting: (e) => Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: LoginType.values
+                                      .map((e) => SignInWithProviderButton(
+                                            loginType: e,
+                                          ))
+                                      .toList(),
+                                ),
                             loading: () => const Loader(),
                             loggedIn: () => Text('Successfully Logged In!',
                                 style: Theme.of(context)

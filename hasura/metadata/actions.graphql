@@ -1,6 +1,7 @@
 type Mutation {
   authenticate(
     token: String!
+    auth_provider: AuthProvider!
   ): AuthenticationOutput
 }
 
@@ -9,6 +10,10 @@ type Mutation {
     name: String!
     comment: String
   ): UploadFilmOutput
+}
+
+enum AuthProvider {
+  Google
 }
 
 type AuthenticationOutput {

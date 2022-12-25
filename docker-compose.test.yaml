@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  fns:
+    build:
+      context: fns
+    ports:
+     - ${API_PORT}:${API_PORT}
+    volumes:
+    - ./fns:/opt/app/api
+    environment:
+        PORT: '${API_PORT}'
+        WEBHOOK_SECRET_KEY: ${WEBHOOK_SECRET_KEY}
+        HASURA_ENDPOINT: ${HASURA_ENDPOINT}
+        HASURA_ADMIN_SECRET: ${ADMIN_SECRET}
+        JWT_SECRET: ${JWT_SECRET}
+        OBJECT_STORAGE_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY}
+        OBJECT_STORAGE_ACCESS_SECRET: ${OBJECT_STORAGE_ACCESS_SECRET}
+        BUCKET_NAME: ${BUCKET_NAME}
+        OBJECT_STORAGE_ADDRESS: ${OBJECT_STORAGE_ADDRESS}
+        OBJECT_STORAGE_REGION: ${OBJECT_STORAGE_REGION}
+        OBJECT_STORAGE_USE_SSL: ${OBJECT_STORAGE_USE_SSL}

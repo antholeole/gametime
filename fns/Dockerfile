@@ -1,12 +1,6 @@
-FROM golang:latest as base
+FROM arm64v8/rust:1.31
 
-WORKDIR /opt/app/api
+WORKDIR /src
 
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
-
-FROM base as dev
-
-RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-CMD ["air"]
+RUN cargo install cargo-watch
+CMD ["cargo", "watch", "-x", "run", "-w", "src"]

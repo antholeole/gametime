@@ -1,0 +1,4 @@
+table:
+  name: auth_providers
+  schema: public
+is_enum: true

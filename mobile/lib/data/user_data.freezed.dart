@@ -22,10 +22,8 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 class _$UserDataTearOff {
   const _$UserDataTearOff();
 
-  _UserData call({required bool admin}) {
-    return _UserData(
-      admin: admin,
-    );
+  _UserData call() {
+    return const _UserData();
   }
 
   UserData fromJson(Map<String, Object?> json) {
@@ -38,19 +36,13 @@ const $UserData = _$UserDataTearOff();
 
 /// @nodoc
 mixin _$UserData {
-  bool get admin => throw _privateConstructorUsedError;
-
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UserDataCopyWith<UserData> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res>;
-  $Res call({bool admin});
 }
 
 /// @nodoc
@@ -60,26 +52,12 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
   final UserData _value;
   // ignore: unused_field
   final $Res Function(UserData) _then;
-
-  @override
-  $Res call({
-    Object? admin = freezed,
-  }) {
-    return _then(_value.copyWith(
-      admin: admin == freezed
-          ? _value.admin
-          : admin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
+abstract class _$UserDataCopyWith<$Res> {
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) then) =
       __$UserDataCopyWithImpl<$Res>;
-  @override
-  $Res call({bool admin});
 }
 
 /// @nodoc
@@ -90,52 +68,29 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 
   @override
   _UserData get _value => super._value as _UserData;
-
-  @override
-  $Res call({
-    Object? admin = freezed,
-  }) {
-    return _then(_UserData(
-      admin: admin == freezed
-          ? _value.admin
-          : admin // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$_UserData implements _UserData {
-  const _$_UserData({required this.admin});
+  const _$_UserData();
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
 
   @override
-  final bool admin;
-
-  @override
   String toString() {
-    return 'UserData(admin: $admin)';
+    return 'UserData()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _UserData &&
-            const DeepCollectionEquality().equals(other.admin, admin));
+        (other.runtimeType == runtimeType && other is _UserData);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(admin));
-
-  @JsonKey(ignore: true)
-  @override
-  _$UserDataCopyWith<_UserData> get copyWith =>
-      __$UserDataCopyWithImpl<_UserData>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   Map<String, dynamic> toJson() {
@@ -144,14 +99,7 @@ class _$_UserData implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  const factory _UserData({required bool admin}) = _$_UserData;
+  const factory _UserData() = _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
-
-  @override
-  bool get admin;
-  @override
-  @JsonKey(ignore: true)
-  _$UserDataCopyWith<_UserData> get copyWith =>
-      throw _privateConstructorUsedError;
 }

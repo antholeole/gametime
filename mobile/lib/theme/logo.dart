@@ -6,8 +6,8 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'GQL Starter',
-      style: Theme.of(context).textTheme.headline4,
+      'Sports Video',
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }

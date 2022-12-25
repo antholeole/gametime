@@ -5,7 +5,7 @@ part 'user_data.g.dart';
 
 @freezed
 class UserData with _$UserData {
-  const factory UserData({required bool admin}) = _UserData;
+  const factory UserData() = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);

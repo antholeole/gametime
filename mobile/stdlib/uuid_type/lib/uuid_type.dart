@@ -48,3 +48,32 @@ class UuidJsonTypeConverter implements JsonConverter<UuidType, String> {
   @override
   String toJson(UuidType json) => uuidTypeToJson(json);
 }
+
+class UuidConverter implements JsonConverter<UuidType, String> {
+  const UuidConverter();
+
+  @override
+  UuidType fromJson(String json) {
+    return UuidType(json);
+  }
+
+  @override
+  String toJson(UuidType json) => json._uuid;
+}
+
+class NullableUuidConverter implements JsonConverter<UuidType?, String?> {
+  const NullableUuidConverter();
+
+  @override
+  UuidType? fromJson(String? json) {
+    if (json == null) return null;
+
+    return UuidType(json);
+  }
+
+  @override
+  String? toJson(UuidType? json) {
+    if (json == null) return null;
+    return json._uuid;
+  }
+}

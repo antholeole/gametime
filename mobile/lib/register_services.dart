@@ -1,8 +1,8 @@
 import 'package:gametime/data/user_data.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gametime/configs/base_config.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gql_client/gql_client.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:local_value/local_value.dart';
 
 import 'package:local_user/local_user.dart';
@@ -11,7 +11,7 @@ final getIt = GetIt.I;
 
 void registerBasicServices(GetIt getIt, Config config) {
   getIt.registerSingleton<Config>(config);
-  getIt.registerSingleton<FilePicker>(FilePicker.platform);
+  getIt.registerSingleton<GoogleSignIn>(GoogleSignIn.standard());
   getIt.registerSingleton<LocalUser<UserData>>(
     LocalUser<UserData>(
       userData: LocalSingleton<UserData>(

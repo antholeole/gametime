@@ -1,8 +1,0 @@
-mutation UploadFilm($comment: String, $name: String!) {
-  upload_film(
-    comment: $comment,
-    name: $name
-  ) {
-    upload_url
-  }
-}

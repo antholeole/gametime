@@ -1,5 +1,8 @@
-mutation Authenticate($token: String!) {
-  authenticate(token: $token) {
+mutation Authenticate($token: String!, $auth_provider: AuthProvider!) {
+  authenticate(
+    token: $token,
+    auth_provider: $auth_provider
+    ) {
 		access_token,
     admin,
     id,

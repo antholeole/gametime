@@ -3,6 +3,8 @@ node_modules
 package-lock.json
 .env
 
+
+# keep the s3 bucket folder, but none of the minio internals
 .s3bucket/.minio.sys
 .s3bucket/localbucket/**
 !.s3bucket/localbucket/.gitkeep

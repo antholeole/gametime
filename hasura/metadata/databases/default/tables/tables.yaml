@@ -1,2 +1,3 @@
 - "!include private_users.yaml"
+- "!include public_auth_providers.yaml"
 - "!include public_film.yaml"

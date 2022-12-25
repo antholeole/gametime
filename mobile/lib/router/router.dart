@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gametime/pages/home/film_page.dart';
+import 'package:gametime/pages/home/home_page.dart';
 import 'package:gametime/pages/login/view/login_page.dart';
 import 'package:gametime/pages/splash/splash_page.dart';
-import 'package:gametime/pages/watch/view/watch_page.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -22,11 +21,6 @@ import 'package:gametime/pages/watch/view/watch_page.dart';
       page: HomePage,
       transitionsBuilder: noAnimationTransition,
       path: '/home',
-      children: [
-        CustomRoute(
-          page: WatchPage,
-        )
-      ],
     )
   ],
 )
